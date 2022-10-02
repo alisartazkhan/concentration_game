@@ -1,2 +1,0 @@
-All the classses in the class folder should be in the src directory like regular java projects and images are just in the project 
-directory. They should work just fine. I didn't know how to give directions so I just wanted to put this in there.
