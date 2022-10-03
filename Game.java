@@ -1,13 +1,11 @@
 /*
  * Name: Ali Sartaz Khan
- * Class: CSc 335
  * Description: Makes the game class that sets up all the objects and has
  * them ready for the UI class to use
  */
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -56,34 +54,35 @@ public class Game {
 		
 	}
 
+	/*
+	 * Write text on the GUI display using given coordinates and parameters
+	 * x: x num
+	 * y: y num
+	 * w: width
+	 * h: height
+	 * txt: String text to display
+	 * font: Font object to display text using
+	 */
 	private static Text writeText(int x, int y, int w, int h, String txt, Font font, Shell s, Display d) {
-		/*
-		 * Write text on the GUI display using given coordinates and parameters
-		 * x: x num
-		 * y: y num
-		 * w: width
-		 * h: height
-		 * txt: String text to display
-		 * font: Font object to display text using
-		 */
 		Text text = new Text(s, SWT.LEFT);
-        text.setText(txt);
-        text.setFont(font);
-        
-        text.setBounds(x, y, w, h);
-        text.setSize(w,h);
-        text.setBackground(d.getSystemColor(SWT.COLOR_WHITE));
-        text.setForeground(d.getSystemColor(SWT.COLOR_BLACK));
-        
-        return text;
+		text.setText(txt);
+		text.setFont(font);
+
+		text.setBounds(x, y, w, h);
+		text.setSize(w,h);
+		text.setBackground(d.getSystemColor(SWT.COLOR_WHITE));
+		text.setForeground(d.getSystemColor(SWT.COLOR_BLACK));
+
+		return text;
 	}
   
-	public static  void createplayers(ArrayList<Player> list, int playerNumber)
-	{ /*
-		Creates new players and adds them to the list. 
-		list: List of all the players
-		playerNumber: Number of total players
+	 /*
+	  * Creates new players and adds them to the list. 
+	  * list: List of all the players
+	  * playerNumber: Number of total players
 	*/
+	public static  void createplayers(ArrayList<Player> list, int playerNumber)
+	{
 		if (playerNumber == 2) // regular format
 		{
 		list.add(new Player("Sartaz"));
@@ -108,19 +107,22 @@ class ButtonSelectionListener implements SelectionListener
 	Card[][] board;
 	ArrayList<Player> playerList;
 	Display d;
+	
+	/*
+	* Constructor initializes attributes and take in 3 parameters.
+	*/
 	public ButtonSelectionListener(Card[][] boardArr, ArrayList<Player> playerList, Display d) {
-		/*
-		 * Constructor initializes attributes and take in 3 parameters.
-		 */
+		
 		this.board = boardArr;
 		this.playerList = playerList;
 		this.d = d;
 	}
+	
+	/*
+	* When button is clicked, button disposes current display and creates a new UI object
+	* to run the actual game on
+	*/
 	public void widgetSelected(SelectionEvent event) {
-		/*
-		 * When button is clicked, button disposes current display and creates a new UI object
-		 * to run the actual game on
-		 */
 		d.dispose();
 		UI ui = new UI(board, playerList);}
 	public void widgetDefaultSelected(SelectionEvent event){}    
