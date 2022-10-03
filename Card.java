@@ -1,6 +1,5 @@
 /*
  * Name: Ali Sartaz Khan
- * Class: CSc 335
  * Description: Makes the card object which is used to create the 2D card array
  */
 import org.eclipse.swt.SWT;
@@ -21,54 +20,63 @@ public class Card {
 	private String name;
 	private String imgPath;
 	private Button button;
+	
+	/*
+	* Contructor initilizes card image and image path
+	* name: Card name
+	* imgPath: image path from current directory
+	*/
 	public Card(String name, String imgPath) {
-		/*
-		 * Contructor initilizes card image and image path
-		 * name: Card name
-		 * imgPath: image path from current directory
-		 */
 		this.name = name;
 		this.imgPath = imgPath;
 	}
 	
+	/*
+	 * Returns image path
+	 */
 	public String getImage() {
-		/*
-		 * Returns image path
-		 */
+		
 		return imgPath;
 	}
+	
+	/*
+	* Returns card name
+	*/
 	public String getName() {
-		/*
-		 * Returns card name
-		 */
+		
 		return name;
 	}
 
+	/*
+	* Card representation in string format
+	*/
 	public String toString() {
-		/*
-		 * Card representation in string format
-		 */
+		
 		return name;
 	}
 
+	/*
+	 * Setter for button attribute
+	 * button: Button object that displays this card
+	*/
 	public void setButton(Button button) {
-		/*
-		 * Setter for button attribute
-		 * button: Button object that displays this card
-		 */
 		this.button = button;
 	}
+	
+	/*
+	 * Getter for button attribute
+	 */
 	public Button getButton() {
-		/*
-		 * Getter for button attribute
-		 */
+	
 		return button;
 	}
+	
+	/*
+	 * Checks to see if this card object and the one in the parameter matches
+	 * c: Card object
+	 */
 	public boolean isMatching(Card c){
-		/*
-		 * Checks to see if this card object and the one in the parameter matches
-		 * c: Card object
-		 */
+		
 		return this.name.equals(c.getName());
 	}
 	
