@@ -21,8 +21,6 @@ public class Game {
 	
 	public static void main(String args[]) 
 	{
-		
-		
 		int playerNumber;
 		playerNumber = 2; // set player number
 		ArrayList<Player> playerList = new ArrayList<>();
