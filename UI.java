@@ -1,6 +1,5 @@
 /*
  * Name: Ali Sartaz Khan
- * Class: CSc 335
  * Description: UI class that displays the game using data from the Game class
  */
 
@@ -21,18 +20,18 @@ public class UI {
 	Button button;
 	Image image;
 	Image blank = new Image(display, "blank.png");
-    Image white = new Image(display, "white.png");
-    ArrayList<Text> points;
+    	Image white = new Image(display, "white.png");
+    	ArrayList<Text> points;
+	
+	/*
+	 * Constructor sets up the display and creates the card deck to be displayed on screen. 
+	 * It also makes sure that the data is being updated based on changes in the display made
+	 * by the user/
+	 * 
+	 * board: 2D array of all the cards
+	 * playerList; ArrayList of all the players
+	 */
 	public UI(Card[][] board, ArrayList<Player> playerList){
-		/*
-		 * Constructor sets up the display and creates the card deck to be displayed on screen. 
-		 * It also makes sure that the data is being updated based on changes in the display made
-		 * by the user/
-		 * 
-		 * board: 2D array of all the cards
-		 * playerList; ArrayList of all the players
-		 */
-
         shell.setSize(600, 600);
         cards = new ArrayList<>();
         matched = new ArrayList<>();
@@ -92,12 +91,13 @@ public class UI {
             	gameOver = true;}
         }
         display.dispose();
-}    	
+	}   
+	
+	/*
+	 * Makes the deck of cards using buttons for each element of board
+	 * Board: 2d Array containing cards
+	 */
 	private void makeDeck(Card[][] board) {
-		/*
-		 * Makes the deck of cards using buttons for each element of board
-		 * Board: 2d Array containing cards
-		 */
 		int y = 50;
         for(int i=0;i<board.length; i++)
         {
@@ -116,11 +116,12 @@ public class UI {
         	y+=105;
         }
 	}
+	
+	/*
+	 * Update points on the display
+	 * playerList: ArrayList of all players
+	 */
 	private void updatePoints(ArrayList<Player> playerList) {
-		/*
-		 * Update points on the display
-		 * playerList: ArrayList of all players
-		 */
 		for (int i=0; i<points.size();i++)
 		{
 			Player p = playerList.get(i);
@@ -129,11 +130,12 @@ public class UI {
 			
 		}
 	}
+	
+	/*
+	 * Display all players and their points on the display 
+	 * playerList: list of all the players
+	 */
 	private void displayAllPlayers(ArrayList<Player> playerList) {
-		/*
-		 * Display all players and their points on the display 
-		 * playerList: list of all the players
-		 */
 		int x = 210;
 		for (Player p: playerList)
 		{
@@ -141,36 +143,37 @@ public class UI {
 			x+=100;
 		}
 	}
+	
+	/*
+	 * Write text on the GUI display using given coordinates and parameters
+	 * x: x num
+	 * y: y num
+	 * w: width
+	 * h: height
+	 * txt: String text to display
+	 * font: Font object to display text using
+	 */
 	private static Text writeText(int x, int y, int w, int h, String txt, Font font) {
-		/*
-		 * Write text on the GUI display using given coordinates and parameters
-		 * x: x num
-		 * y: y num
-		 * w: width
-		 * h: height
-		 * txt: String text to display
-		 * font: Font object to display text using
-		 */
+		
 
 		Text text = new Text(shell, SWT.CENTER);
-        text.setText(txt);
-        text.setFont(font);
-        
-        text.setBounds(x, y, w, h);
-        text.setSize(w,h);
-        text.setBackground(display.getSystemColor(SWT.COLOR_WHITE));
-        text.setForeground(display.getSystemColor(SWT.COLOR_BLACK));
-        
-        return text;
+		text.setText(txt);
+		text.setFont(font);
+
+		text.setBounds(x, y, w, h);
+		text.setSize(w,h);
+		text.setBackground(display.getSystemColor(SWT.COLOR_WHITE));
+		text.setForeground(display.getSystemColor(SWT.COLOR_BLACK));
+
+		return text;
 	}
   
-        
+        /*
+	 * Displays the player who won
+	 * playerList: list of all the players
+	 * turn: Text object that displays the winner
+	 */
 	private void winningPlayer(ArrayList<Player> playerList, Text turn) {
-		/*
-		 * Displays the player who won
-		 * playerList: list of all the players
-		 * turn: Text object that displays the winner
-		 */
 		Player maxPlayer = null;
 		// The for loop at the bottom is when there are more than 2 players
 		if (playerList.size() != 2) {
@@ -209,48 +212,44 @@ public class UI {
 		
 	}
 
-
+	/*
+	 * Sets card images to blank box if they dont match
+	 * c1: Card object
+	 * c2: Card object
+	 */
 	private void cardsNotMatch(Card c1, Card c2) {
-		/*
-		 * Sets card images to blank box if they dont match
-		 * c1: Card object
-		 * c2: Card object
-		 */
 		c1.getButton().setImage(blank);
 		c2.getButton().setImage(blank);
 	}
 
-
+	/*
+	 * Sets card images to white if they match and add them to matched list 
+	 * and get rid of them from cards list.
+	 * c1: Card object
+	 * c2: Card object
+	 */
 	private void cardsMatch(Card c1, Card c2) {
-		/*
-		 * Sets card images to white if they match and add them to matched list 
-		 * and get rid of them from cards list.
-		 * c1: Card object
-		 * c2: Card object
-		 */
 		c1.getButton().setImage(white);
-    	c2.getButton().setImage(white);
-    	cards.remove(c1);
-    	cards.remove(c2);
-    	matched.add(c1);
-    	matched.add(c2);
+		c2.getButton().setImage(white);
+		cards.remove(c1);
+		cards.remove(c2);
+		matched.add(c1);
+		matched.add(c2);
 	}
 
-
+	/*
+	 * Checks if game is over and returns a boolean value
+	 */
 	public boolean isGameOver(int cardsNum){
-		/*
-		 * Checks if game is over
-		 */
 		return cardsNum == 0;
 		
 	}
         
        
-	
+	/*
+	 * Event Listener class for card button which reacts to the mouse clicks
+	 */
 	class btnListener implements MouseListener{
-		/*
-		 * Event Listener class for card button which reacts to the mouse clicks
-		 */
 		Card card;
 		Button button;
 		Display display;
@@ -258,13 +257,15 @@ public class UI {
 		ArrayList<Card> cards;
 		int count;
 		Image blank = new Image(display, "blank.png");
-        Image white = new Image(display, "white.png");
-        ArrayList<Card> matched;
+		Image white = new Image(display, "white.png");
+		ArrayList<Card> matched;
+		
+		/*
+		 * Constructor initializes all the attributes
+		 */
 		public btnListener(Card card, Button button, Display display, Card[][] board, 
 				ArrayList<Card> cards, ArrayList<Card> matched) {
-			/*
-			 * Constructor initializes all the attributes
-			 */
+			
 			this.card = card;
 			this.button = button;
 			this.display = display;
@@ -279,12 +280,14 @@ public class UI {
 		@Override
 		public void mouseDoubleClick(MouseEvent e) {}
 
+		
+		/*
+		 * After mouse click, method changes the button image and also adds null or the card obj
+		 * into the card list.
+		 */
 		@Override
 		public void mouseDown(MouseEvent e) {
-			/*
-			 * After mouse click, method changes the button image and also adds null or the card obj
-			 * into the card list.
-			 */
+			
 				if (!matched.contains(card)) // so matched cards wont do anything when clicked
 					button.setImage(new Image(display,card.getImage()));
 				
